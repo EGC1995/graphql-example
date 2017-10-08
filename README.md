@@ -22,3 +22,26 @@ Running GraphQL API server at http://localhost:4000/graphql
 ```
 
 At which point you can point your browser to your GraphQL endpoint at [http://localhost:4000/graphql] and explore it.
+
+
+## Example GraphQL Queries
+
+Looking up a user and their name by their `_id`:
+```
+{
+  users(_id:1) {
+    _id
+    name
+  }
+}
+```
+
+Or omit the `_id` from the results:
+```
+{
+  users(_id:1) {
+    name
+  }
+}
+```
+

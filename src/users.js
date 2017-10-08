@@ -48,6 +48,7 @@ const UserQuery = {
       type: GraphQLInt,
     },
   },
+  // Filter out the matching element from the source data array
   resolve: (root, { _id = null }) => _id ? users.filter(u => u._id === _id) : users,
 };
 
