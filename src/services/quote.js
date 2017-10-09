@@ -20,7 +20,6 @@ export const
 
 // Transform the raw microservice output into fields/types defined by the GraphQL type
 const transform = (json) => {
-    console.log(json);
     const
         { contents } = json,
         { quotes } = contents,
