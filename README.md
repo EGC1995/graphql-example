@@ -54,3 +54,15 @@ You can also list all users:
   }
 }
 ```
+
+## Example REST queries
+
+- `http://localhost:4000/users/2` -- perform a REST call to fetch user ID 2
+- `http://localhost:4000/quote` -- return a quote of the day from our "microservice" at http://quotes.rest/
+
+
+## Explanation
+
+This repo demostrates a simple combination of GraphQL and RESTful endpoints.  GraphQL types (e.g. the "quote" type) relies on a service class whose job it is to fetch the data from a microservice.  The REST endpoints rely on GraphQL.
+
+This repo does not demonstrate how to set up the dependencies the other way (i.e. have GraphQL rely on the REST classes, and the REST classes rely on the supporting service classes).
