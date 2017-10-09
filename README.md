@@ -55,6 +55,34 @@ You can also list all users:
 }
 ```
 
+Get a quote of the day using GraphQL:
+
+```
+{
+  quote {
+    quote
+  }
+}
+```
+
+Do both:
+
+```
+{
+  users(_id: 3) {
+    name
+  },
+  quote {
+    quote
+  }
+}
+```
+
+
+## Rate Limiting
+
+The public quote API service has a rate limit of 10 requests per hour exceeded.  Sorry, I should have chosen a better example.
+
 ## Example REST queries
 
 - `http://localhost:4000/users/2` -- perform a REST call to fetch user ID 2
