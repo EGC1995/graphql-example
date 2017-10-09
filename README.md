@@ -21,7 +21,7 @@ You should see the following message:
 Running GraphQL API server at http://localhost:4000/graphql
 ```
 
-At which point you can point your browser to your GraphQL endpoint at [http://localhost:4000/graphql] and explore it.
+At which point you can point your browser to your GraphQL endpoint at http://localhost:4000/graphql and explore it.
 
 
 ## Example GraphQL Queries
@@ -65,7 +65,7 @@ Get a quote of the day using GraphQL:
 }
 ```
 
-Do both:
+Do both (aggregate data):
 
 ```
 {
@@ -78,11 +78,6 @@ Do both:
 }
 ```
 
-
-## Rate Limiting
-
-The public quote API service has a rate limit of 10 requests per hour exceeded.  Sorry, I should have chosen a better example.
-
 ## Example REST queries
 
 - `http://localhost:4000/users/2` -- perform a REST call to fetch user ID 2
@@ -91,6 +86,9 @@ The public quote API service has a rate limit of 10 requests per hour exceeded. 
 
 ## Explanation
 
-This repo demostrates a simple combination of GraphQL and RESTful endpoints.  GraphQL types (e.g. the "quote" type) relies on a service class whose job it is to fetch the data from a microservice.  The REST endpoints rely on GraphQL.
+This repo demostrates a simple combination of GraphQL and RESTful endpoints.  GraphQL types (e.g. the "quote" type) relies on a service class whose job it is to fetch the data from a microservice.  The REST endpoints rely on GraphQL.  The goal was to not repeat code anywhere.  In this example, the REST requests are translated into GraphQL queries and then fed through the application.  This repo represents an easier solution than structuring it the other way around and trying to translate GraphQL queries into their REST equivalents (although that approach should be possible). 
 
-This repo does not demonstrate how to set up the dependencies the other way (i.e. have GraphQL rely on the REST classes, and the REST classes rely on the supporting service classes).
+
+## Rate Limiting
+
+The public quote API service has a rate limit of 10 requests per hour exceeded.  (Sorry, I should have chosen a better example).
