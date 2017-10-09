@@ -45,3 +45,12 @@ Or omit the `_id` from the results:
 }
 ```
 
+You can also list all users:
+
+```
+{
+  users {
+    name
+  }
+}
+```

@@ -1,30 +1,43 @@
-import fetch from 'universal-fetch'
+/**
+ * This is where the app defines the GraphQL resource type.
+ * The fields and data types (as well as descriptions for users browsing the API)
+ * stem from these definitions.
+ */
+import {
+    GraphQLObjectType,
+    GraphQLNonNull,
+    GraphQLString
+} from 'graphql/type';
 
-export const
-    getQuote = () => {
-        const url = 'http://quotes.rest/qod.json?category=inspire'
-        return fetch(url)
-            .then(response => {
-                return response.json()
-            })
-            .then(json => {
-                return transform(json)
-            })
-            .catch(err => {
-                console.trace(err)
-            })
-    }
+import { getQuote } from './services/quote'
 
-const transform = (json) => {
-    const
-        { contents } = json,
-        { quotes } = contents,
-        quote = quotes[0]
+/**
+ * GraphQL Quote type
+ */
+export const QuoteType = new GraphQLObjectType({
+    name: 'Quote',
+    description: 'Quote of the day from API service',
+    fields: () => ({
+        id: {
+            type: GraphQLString,
+            description: 'Quote id',
+        },
+        quote: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: 'The text of the quote',
+        },
+        author: {
+            type: GraphQLString,
+            description: 'The person to whom the quote is attributed',
+        },
+        date: {
+            type: GraphQLString,
+            description: 'Date in YYYY-MM-DD format',
+        }
+    })
+});
 
-    return {
-        id: quote.id,
-        quote: quote.quote,
-        author: quote.author,
-        date: quote.date
-    }
+export default {
+    type: QuoteType,
+    resolve: getQuote
 }

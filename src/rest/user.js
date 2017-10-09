@@ -1,10 +1,5 @@
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
-import rootSchema from './src/app';
-import {graphql as client} from 'graphql'
-
-const app = express();
-
+const app = require('express');
+const router = express.Router();
 
 const query = (q, vars) => {
     return client(rootSchema, q, null, null, vars)
@@ -26,9 +21,6 @@ const transformUser = (result) => {
     }
 }
 
-app.get('/quote', (req, res) => {
-    res.send('TODO: get a quote')
-})
 
 // REST request to get a user
 app.get('/users/:userId', (req, res) => {
@@ -43,12 +35,4 @@ app.get('/users/:userId', (req, res) => {
         })
 })
 
-// Here is the single GraphQL endpoint:
-app.use('/graphql', graphqlHTTP({
-    schema: rootSchema,
-    graphiql: true,
-}));
-
-app.listen(4000);
-
-console.log('Running GraphQL + REST API Gateway at http://localhost:4000/graphql');
+module.exports = router;
